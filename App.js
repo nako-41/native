@@ -1,21 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, TouchableOpacity } from "react-native";
+import { Actions,Router,Scene } from "react-native-router-flux";
 
-export default function App() {
+
+
+
+const Home =() => {
+   const goToAbout = () => {
+     Actions.about();
+   }
+   return (
+     <TouchableOpacity style={{ margin: 128 }} onPress={goToAbout}>
+       <Text>This is HOME</Text>
+     </TouchableOpacity>
+   );
+}
+
+const About=() => {
+  const goToHome=() => {
+    Actions.home();
+  };
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TouchableOpacity style={{ margin: 128 }} onPress={goToHome}>
+    <Text>This is ABOUT!</Text>
+  </TouchableOpacity>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App =() => {
+  return(
+  <Router>
+    <Scene key ="root">
+      <Scene key="home" component={Home} title="Home" initial={true} />
+      <Scene key="about" component={About} title="About" />
+
+    </Scene>
+  </Router>
+  )
+}
+
+export default App;
+
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#0ff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },  
+// });
